@@ -1,0 +1,64 @@
+function [x, fx] = dorada(f, xi, xs, iter)
+  %{
+    Joel Quintuña 
+    f: función
+    xi: límite inferior  
+    xs: límite superior 
+    iter: número de iteraciones 
+    x: valor en donde la función tiene valor máximo 
+    fx: valor en máximo de la función 
+   %}
+  fl=f(xi);  
+  fu=f(xs);  
+  R=(sqrt(5)-1)/2; 
+  d=(xs-xi)*R; 
+  x1=xi+d;
+  fx1=f(x1); 
+  x2=xs-d; 
+  fx2=f(x2); 
+  i=0;
+  while i<iter-1
+    
+    d=d*R; 
+    
+    if fx1>fx2
+      
+      xi=x2;
+      fxl=fx2;
+      x2=x1;
+      fx2=fx1;
+      x1=xi+d;
+      fx1=f(x1);  
+      xs=xs;
+      fu=fu; 
+      
+    elseif fx2>fx1
+      
+      xs=x1;
+      fxu=fx1;
+      x1=x2;
+      fx1=fx2; 
+      x2=xs-d;
+      fx2=f(x2); 
+      xi=xi;
+      fl=fl; 
+      
+    end
+    
+    i=i+1;
+    
+  end
+  
+  if fx1>fx2
+    
+    x=x1;
+    fx=fx1;
+    
+  else
+    
+    x=x2;
+    fx=fx2; 
+    
+  end
+  
+end
